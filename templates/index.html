@@ -11,61 +11,137 @@
     <h1>Xendit Cards Proof-of-Concept</h1>
 
     <hr>
-    <h2>1. Tokenize & Save</h2>
-    <h3>Collect card info, tokenize to Xendit, then save token to backend</h3>
-    <form id="token-form">
-        <label for="card_number">Card Number:</label><br>
-        <input id="card_number" placeholder="Card Number" , value="4000000000002503" required><br>
+    <h2>Log in normally and paste session token here</h2>
+    <input id="auth_token" placeholder="Auth token"><br>
 
-        <label for="exp_month">Expiration Month (MM)</label><br>
-        <input id="exp_month" placeholder="MM" maxlength="2" , value="12" required><br>
+    <hr>
+    <h2>1. Card Management</h2>
+    <h3>1.1. Tokenize card and save to backend</h3>
+    <form id="save-form">
+        <label for="save-card-number">Card Number:</label><br>
+        <input id="save-card-number" placeholder="Card Number" , value="4000000000002503" required><br>
 
-        <label for="exp_year">Expiration Year (YYYY)</label><br>
-        <input id="exp_year" placeholder="YYYY" maxlength="4" , value="2040" required><br>
+        <label for="save-exp-month">Expiration Month (MM)</label><br>
+        <input id="save-exp-month" placeholder="MM" maxlength="2" , value="12" required><br>
 
-        <label for="card_cvn">Card CVV:</label><br>
-        <input id="card_cvn" placeholder="CVV" maxlength="4" , value="123" required><br>
+        <label for="save-exp-year">Expiration Year (YYYY)</label><br>
+        <input id="save-exp-year" placeholder="YYYY" maxlength="4" , value="2040" required><br>
 
-        <label for="first_name">First Name:</label><br>
-        <input id="first_name" placeholder="First Name" , value="firstname" required><br>
+        <label for="save-card-cvn">Card CVV:</label><br>
+        <input id="save-card-cvn" placeholder="CVV" maxlength="4" , value="123" required><br>
 
-        <label for="last_name">Last Name:</label><br>
-        <input id="last_name" placeholder="Last Name" , value="lastname" required><br>
+        <label for="save-firstname">First Name:</label><br>
+        <input id="save-firstname" placeholder="First Name" , value="firstname" required><br>
 
-        <label for="email">Email:</label><br>
-        <input id="email" placeholder="Email" type="email" , value="first_last@gmail.com" required><br>
+        <label for="save-lastname">Last Name:</label><br>
+        <input id="save-lastname" placeholder="Last Name" , value="lastname" required><br>
 
-        <label for="email">Phone:</label><br>
-        <input id="phone" placeholder="Phone" , value="+68213445345345" required><br>
+        <label for="save-email">Email:</label><br>
+        <input id="save-email" placeholder="Email" type="email" , value="first_last@gmail.com" required><br>
+
+        <label for="save-phone">Phone:</label><br>
+        <input id="save-phone" placeholder="Phone" , value="+68213445345345" required><br>
         <button type="submit">Tokenize & Save</button>
     </form>
-    <pre id="token-response" style="white-space: pre-wrap;"></pre>
+    <pre id="save-response-xendit" style="white-space: pre-wrap;"></pre>
+    <pre id="save-response-backend" style="white-space: pre-wrap;"></pre>
+    <br>
 
-    <hr>
-    <h2>2. Your Saved Cards</h2>
-    <h3>Retrieve all saved cards</h3>
+    <h3>1.2. Get Saved Cards</h3>
+    <p>Retrieve all saved cards</p>
     <button id="load-btn">Load My Cards</button><br>
+    <pre id="tokens-response-backend" style="white-space: pre-wrap;"></pre>
+    <br>
+
+    <h3>1.3. Choose a Card</h3>
     <select id="token-select"></select>
-    <pre id="tokens-response" style="white-space: pre-wrap;"></pre>
+    <br>
+    <br>
+
+    <h3>1.4. Get Full Card Details</h3>
+    <p>This endpoint is important as it returns the card's token, which is one of the things you need to make a purchase.</p>
+    <button id="details-btn">Get Card Details</button><br>
+    <pre id="details-response-backend" style="white-space: pre-wrap;"></pre>
+    <br>
+
+    <h3>1.5. Delete a Card</h3>
+    <p>Delete the card you chose above</p>
+    <button id="delete-btn">Delete My Card</button><br>
+    <pre id="delete-response-backend" style="white-space: pre-wrap;"></pre>
+    <br>
+
+    <h3>1.6. Update a Card</h3>
+    <p>When a saved token becomes invalid, for instance when it expires or its CVV changes, you can send a PUT request to the backend to update it.</p>
+    <form id="update-form">
+        <label for="update-card-number">Card Number:</label><br>
+        <input id="update-card-number" placeholder="Card Number" , value="4000000000002503" required><br>
+
+        <label for="update-exp-month">Expiration Month (MM)</label><br>
+        <input id="update-exp-month" placeholder="MM" maxlength="2" , value="12" required><br>
+
+        <label for="update-exp-year">Expiration Year (YYYY)</label><br>
+        <input id="update-exp-year" placeholder="YYYY" maxlength="4" , value="2040" required><br>
+
+        <label for="update-card-cvn">Card CVV:</label><br>
+        <input id="update-card-cvn" placeholder="CVV" maxlength="4" , value="123" required><br>
+
+        <label for="update-firstname">First Name:</label><br>
+        <input id="update-firstname" placeholder="First Name" , value="firstname" required><br>
+
+        <label for="update-lastname">Last Name:</label><br>
+        <input id="update-lastname" placeholder="Last Name" , value="lastname" required><br>
+
+        <label for="update-email">Email:</label><br>
+        <input id="update-email" placeholder="Email" type="email" , value="first_last@gmail.com" required><br>
+
+        <label for="update-phone">Phone:</label><br>
+        <input id="update-phone" placeholder="Phone" , value="+68213445345345" required><br>
+        <button type="submit">Tokenize & Update</button>
+    </form>
+    <pre id="update-response-xendit" style="white-space: pre-wrap;"></pre>
+    <pre id="update-response-backend" style="white-space: pre-wrap;"></pre>
+    <br>
 
     <hr>
-    <h2>3. Charge without Auth (should fail)</h2>
-    <h3>If you only have a card token without any authentication, trying to charge that token should fail</h3>
-    <button id="charge-noauth-btn">Charge Rp100.000</button>
+    <h2>2. Authentication</h2>
+    <p>Before a card's token can be used to make purchases, it must first be authenticated. Authentication happens entirely in the frontend. The frontend will call <code>Xendit.card.createAuthentication()</code>. Then, the response from Xendit will contain a URL containing further instructions from the user's bank on how to authenticate their card (usually OTP). So, the frontend should open a new window and redirect the user there to complete their authentication.</p>
+
+    <p>To prove that you can't make purchases before authenticating, try clicking the button below. Choose one of the packets below to use for the demo</p>
+    <select id="packet-select"></select>
+    <br>
+    <br>
+
+    <h3>2.1. Charge without Auth (should fail)</h3>
+    <button id="charge-noauth-btn">Charge</button>
     <pre id="charge-noauth-response" style="white-space: pre-wrap;"></pre>
+    <br>
 
-    <hr>
-    <h2>4. Authenticate (3-DS)</h2>
+    <h3>2.2. Authenticate (3-DS)</h3>
     <h3>Authenticate one of your saved cards before making a purchase</h3>
     <button id="auth-btn">Run 3-DS</button>
     <input id="auth-id" placeholder="Auth ID" readonly size="40"><br>
     <pre id="auth-response" style="white-space: pre-wrap;"></pre>
+    <br>
 
     <hr>
-    <h2>5. Charge with Auth</h2>
-    <h3>Once you have your card token and authentication id, you're ready to make a purchase</h3>
-    <button id="charge-auth-btn">Charge Rp100.000</button>
+    <h2>3. Charging</h2>
+    <p>Once you have your card token and authentication id, you're ready to make a purchase</p>
+    <button id="charge-auth-btn">Charge</button>
     <pre id="charge-auth-response" style="white-space: pre-wrap;"></pre>
+
+    <hr>
+    <h2>4. Get Charge Status (Optional)</h2>
+    <p>One of the statuses you can get after making a charge to Xendit is "AUTHORIZED". This means that the card has been approved for purchase but the actual money hasn't moved yet. If this happens, you can poll <code>/financials/card-charge/&lt;charge_id&gt; for updates on its status.</code></p>
+    <button id="get-charge-btn">Get Charge Status</button>
+    <input id="get-charge-id" placeholder="Charge ID" size="40"><br>
+    <pre id="get-charge-response" style="white-space: pre-wrap;"></pre>
+
+    <hr>
+    <h2>5. Verify Transaction</h2>
+    <p>Verify that the transaction is successful and you've got your packet</p>
+    <button id="verify-btn">Verify</button>
+    <input id="verify-id" placeholder="Transaction ID" size="40"><br>
+    <pre id="verify-response" style="white-space: pre-wrap;"></pre>
 
     <div id="modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);">
         <div style="position:absolute;top:5%;left:5%;width:90%;height:90%;background:#fff;border:1px solid #ccc;">
@@ -77,85 +153,159 @@
     <script>
         Xendit.setPublishableKey("{{ publishable_key }}");
         const $ = id => document.getElementById(id);
-        const showJSON = (el, obj) => el.textContent = JSON.stringify(obj, null, 2);
+        const showJSON = (el, title, obj) => el.textContent = title + "\n" + JSON.stringify(obj, null, 2);
         const showModal = url => { $("modal-frame").src = url; $("modal").style.display = "block"; };
+        let packets = {};
 
-        $("token-form").addEventListener("submit", async e => {
-            e.preventDefault();
+        async function makeRequest(method, endpoint, authenticate, body) {
+            if (authenticate) {
+                headers = {
+                    "Authorization": `Token ${$("auth_token").value}`,
+                    "Content-Type": "application/json",
+                }
+            } else {
+                headers = {
+                    "Content-Type": "application/json",
+                }
+            }
+
+            const resp = await fetch(`http://localhost:8000${endpoint}`, {
+                method: method,
+                headers: headers,
+                body: body === null ? null : JSON.stringify(body)
+            });
+            return await resp.json();
+        }
+
+        async function populatePackets() {
+            const data = await makeRequest("GET", "/subscriptions/packet-offer/", false, null);
+            const sel = $("packet-select");
+            sel.innerHTML = "";
+            data.data.forEach(packet => {
+                let opt = document.createElement("option");
+                opt.value = packet.id,
+                opt.text = packet.packet_name,
+                sel.appendChild(opt);
+                packets[packet.id] = packet;
+            });
+        }
+
+        function getTokenInput(prefix) {
             const cardData = {
-                card_number: $("card_number").value,
-                card_exp_month: $("exp_month").value,
-                card_exp_year: $("exp_year").value,
-                card_cvn: $("card_cvn").value,
-                card_holder_first_name: $("first_name").value,
-                card_holder_last_name: $("last_name").value,
-                card_holder_email: $("email").value,
-                card_holder_phone_number: $("phone").value,
+                card_number: $(`${prefix}-card-number`).value,
+                card_exp_month: $(`${prefix}-exp-month`).value,
+                card_exp_year: $(`${prefix}-exp-year`).value,
+                card_cvn: $(`${prefix}-card-cvn`).value,
+                card_holder_first_name: $(`${prefix}-firstname`).value,
+                card_holder_last_name: $(`${prefix}-lastname`).value,
+                card_holder_email: $(`${prefix}-email`).value,
+                card_holder_phone_number: $(`${prefix}-phone`).value,
                 is_multiple_use: true,
             };
+            return cardData;
+        }
 
+        async function fetchCardToken(cardId) {
+            const data = await makeRequest("GET", `/financials/user-cards/${cardId}`, true, null);
+            return data.card_token;
+        }
+
+        $("save-form").addEventListener("submit", async e => {
+            e.preventDefault();
+            const cardData = getTokenInput("save");
             Xendit.card.createToken(cardData, async function (err, token_resp) {
                 if (err) {
-                    $("token-response").textContent = err.message;
+                    $("save-token-response").textContent = err.message;
                     return;
                 }
 
-                showJSON($("token-response"), token_resp);
+                showJSON($("save-response-xendit"), "Xendit Response", token_resp);
 
                 // store
                 const last4 = cardData.card_number.slice(-4);
-                const resp = await fetch("/tokens", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ cc_token: token_resp.id, last4 })
+                const resp = await makeRequest("POST", "/financials/user-cards/", true, {
+                    brand: `BRAND_${token_resp.card_info.brand}`,
+                    card_token: token_resp.id,
+                    last4_digits: last4,
                 });
-                const body = await resp.json();
-                showJSON($("token-response"), { token_resp, });
+                showJSON($("save-response-backend"), "Backend Response", resp);
             });
         });
 
         $("load-btn").addEventListener("click", async () => {
-            const resp = await fetch("/tokens");
-            const tokens = await resp.json();
-            showJSON($("tokens-response"), tokens);
+            const tokens = await makeRequest("GET", "/financials/user-cards/", true, null);
+            showJSON($("tokens-response-backend"), "Backend Response", tokens);
             const sel = $("token-select");
             sel.innerHTML = "";
-            tokens.forEach(t => {
+            tokens.cards.forEach(t => {
                 let opt = document.createElement("option");
                 opt.value = t.id;
-                opt.text = "**** " + t.last4;
+                opt.text = "**** " + t.last4_digits;
                 sel.appendChild(opt);
             });
         });
 
-        async function fetchRealToken(internalId) {
-            const resp = await fetch(`/tokens/${internalId}`);
-            const data = await resp.json();
-            return data.cc_token;
-        }
+        $("details-btn").addEventListener("click", async () => {
+            const id = $("token-select").value;
+            const body = await makeRequest("GET", `/financials/user-cards/${id}`, true, null);
+            showJSON($("details-response-backend"), "Backend Response", body);
+        });
+
+
+        $("delete-btn").addEventListener("click", async () => {
+            const id = $("token-select").value;
+            const body = await makeRequest("DELETE", `/financials/user-cards/${id}`, true, null);
+            showJSON($("delete-response-backend"), "Backend Response", body);
+        });
+
+        $("update-form").addEventListener("submit", async e => {
+            e.preventDefault();
+            const id = $("token-select").value;
+            const cardData = getTokenInput("update");
+            Xendit.card.createToken(cardData, async function (err, token_resp) {
+                if (err) {
+                    $("update-response-xendit").textContent = err.message;
+                    return;
+                }
+
+                showJSON($("update-response-xendit"), "Xendit Response", token_resp);
+
+                // update
+                const body = await makeRequest("PUT", `/financials/user-cards/${id}`, true, {
+                    card_token: token_resp.id,
+                });
+                showJSON($("update-response-backend"), "Backend Response", body);
+            });
+        });
 
         $("charge-noauth-btn").addEventListener("click", async () => {
-            const id = $("token-select").value;
-            const token = await fetchRealToken(id);
-            const resp = await fetch("/charge_no_auth", {
-                method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ cc_token: token })
+            const resp = await makeRequest("POST", "/subscriptions/checkout/", true, {
+                packet_id: $("packet-select").value,
+                promo_code: null,
+                payment_method: "CARD",
+                user_card_id: $("token-select").value,
+                authentication_id: "some invalid auth id",
             });
-            showJSON($("charge-noauth-response"), await resp.json());
+            showJSON($("charge-noauth-response"), "Backend Response", resp);
         });
 
         $("auth-btn").addEventListener("click", async () => {
-            const id = $("token-select").value;
-            const token = await fetchRealToken(id);
+            const card_id = $("token-select").value;
+            const token = await fetchCardToken(card_id);
+            const packet_id = $("packet-select").value;
+            const packet_price = packets[packet_id].price;
+
             const authData = {
-                amount: 100000,
+                amount: packet_price,
                 token_id: token,
             };
+
             Xendit.card.createAuthentication(authData, function (err, auth_resp) {
                 if (err) {
                     $("auth-response").textContent = err.message;
                     return;
                 }
-                showJSON($("auth-response"), auth_resp);
+                showJSON($("auth-response"), "Xendit response", auth_resp);
                 $("auth-id").value = auth_resp.id;
                 if (auth_resp.status === "IN_REVIEW" && auth_resp.payer_authentication_url) {
                     showModal(auth_resp.payer_authentication_url);
@@ -164,14 +314,31 @@
         });
 
         $("charge-auth-btn").addEventListener("click", async () => {
-            const id = $("token-select").value;
-            const token = await fetchRealToken(id);
-            const auth = $("auth-id").value;
-            const resp = await fetch("/charge_auth", {
-                method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ cc_token: token, auth_id: auth })
+            const resp = await makeRequest("POST", "/subscriptions/checkout/", true, {
+                packet_id: $("packet-select").value,
+                promo_code: null,
+                payment_method: "CARD",
+                user_card_id: $("token-select").value,
+                authentication_id: $("auth-id").value,
             });
-            showJSON($("charge-auth-response"), await resp.json());
+            $("get-charge-id").value = resp.charge_id;
+            $("verify-id").value = resp.id;
+            showJSON($("charge-auth-response"), "Backend Response", resp);
         });
+
+        $("get-charge-btn").addEventListener("click", async () => {
+            const charge_id = $("get-charge-id").value;
+            const resp = await makeRequest("GET", `/financials/card-charge/${charge_id}`, true, null);
+            showJSON($("get-charge-response"), "Backend Response", resp);
+        });
+
+        $("verify-btn").addEventListener("click", async () => {
+            const trx_id = $("verify-id").value;
+            const resp = await makeRequest("GET", `/financials/transaction/${trx_id}`, true, null);
+            showJSON($("verify-response"), "Backend Response", resp);
+        });
+
+        populatePackets();
     </script>
 </body>
 
