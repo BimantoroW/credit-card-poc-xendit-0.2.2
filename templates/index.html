@@ -6,6 +6,11 @@
     <title>Xendit Cards POC</title>
     <script src="https://js.xendit.co/v1/xendit.min.js"></script>
     <script src="{{ url_for('static', filename='js/xendit_cards.js') }}" defer></script>
+    <style>
+        pre.inline {
+            display: inline;
+        }
+    </style>
 </head>
 
 <body>
@@ -61,17 +66,15 @@
 
     <h3>1.4. Get Full Card Details</h3>
     <p>This endpoint is important as it returns the card's token, which is one of the things you need to make a
-        purchase.</p>
-    <p>Getting details of</p>
-    <pre class="card-id-input"></pre>
-    <button id="details-btn">Get Card Details</button><br>
+        purchase</p>
+    Getting details of<pre class="card-id-input inline"></pre><br>
+    <button id="details-btn">Get Card Details</button>
     <pre id="details-response-backend" style="white-space: pre-wrap;"></pre>
     <br>
 
     <h3>1.5. Delete a Card</h3>
-    <p>Deleting card</p>
-    <pre class="card-id-input"></pre>
-    <button id="delete-btn">Delete My Card</button><br>
+    Deleting card <pre class="card-id-input inline"></pre><br>
+    <button id="delete-btn">Delete My Card</button>
     <pre id="delete-response-backend" style="white-space: pre-wrap;"></pre>
     <br>
 
@@ -103,8 +106,8 @@
         <label for="update-phone">Phone:</label><br>
         <input id="update-phone" placeholder="Phone" , value="+68213445345345" required><br>
 
-        <p>Updating card</p>
-        <pre class="card-id-input"></pre>
+        <br>
+        Updating card <pre class="card-id-input inline"></pre><br>
         <button type="submit">Tokenize & Update</button>
     </form>
     <pre id="update-response-xendit" style="white-space: pre-wrap;"></pre>
@@ -126,20 +129,16 @@
     <br>
 
     <h3>2.1. Charge without Auth (should fail)</h3>
-    <p>Buying packet</p>
-    <pre class="packet-id-input"></pre>
-    <p>With card</p>
-    <pre class="card-id-input"></pre>
+    Using card <pre class="card-id-input inline"></pre><br>
+    To buy <pre class="packet-id-input inline"></pre><br>
     <button id="charge-noauth-btn">Charge</button>
     <pre id="charge-noauth-response" style="white-space: pre-wrap;"></pre>
     <br>
 
     <h3>2.2. Authenticate (3-DS)</h3>
     <h3>Authenticate one of your saved cards before making a purchase</h3>
-    <p>Authenticating</p>
-    <pre class="card-id-input"></pre>
-    <p>To buy</p>
-    <pre class="packet-id-input"></pre>
+    Authenticating <pre class="card-id-input inline"></pre><br>
+    To buy <pre class="packet-id-input inline"></pre><br>
     <button id="auth-btn">Run 3-DS</button>
     <input id="auth-id" placeholder="Auth ID" readonly size="40"><br>
     <pre id="auth-response" style="white-space: pre-wrap;"></pre>
@@ -148,20 +147,18 @@
     <hr>
     <h2>3. Charging</h2>
     <p>Once you have your card token and authentication id, you're ready to make a purchase</p>
-    <p>Using card</p>
-    <pre class="card-id-input"></pre>
-    <p>And authentication_id</p>
-    <pre id="auth-id-input"></pre>
-    <p>To buy</p>
-    <pre class="packet-id-input"></pre>
-    <button id="charge-auth-btn">Charge</button>
+    Using card <pre class="card-id-input inline"></pre><br>
+    And authentication_id <pre id="auth-id-input" class="inline"></pre><br>
+    To buy <pre class="packet-id-input inline"></pre><br>
+    <button id="charge-auth-btn">Charge</button><br>
     <pre id="charge-auth-response" style="white-space: pre-wrap;"></pre>
 
     <hr>
     <h2>4. Get Charge Status (Optional)</h2>
     <p>One of the statuses you can get after making a charge to Xendit is "AUTHORIZED". This means that the card has
         been approved for purchase but the actual money hasn't moved yet. If this happens, you can poll
-        <code>/financials/card-charge/&lt;charge_id&gt; for updates on its status.</code></p>
+        <code>/financials/card-charge/&lt;charge_id&gt; for updates on its status.</code>
+    </p>
     <button id="get-charge-btn">Get Charge Status</button>
     <input id="get-charge-id" placeholder="Charge ID" size="40"><br>
     <pre id="get-charge-response" style="white-space: pre-wrap;"></pre>
