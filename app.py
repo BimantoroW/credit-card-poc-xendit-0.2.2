@@ -21,7 +21,7 @@ app = Flask(__name__)
 
 @app.route("/", methods=["GET"])
 def index():
-    return render_template("index.html", publishable_key=PUBLISHABLE_KEY)
+    return render_template("index.html")
 
 # IMPORTANT: All api calls are now routed to the actual backend
 
